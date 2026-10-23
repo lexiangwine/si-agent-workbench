@@ -1,0 +1,10 @@
+{
+  "name": "多 Agent 工程协作",
+  "version": "1.0",
+  "stages": [
+    {"id":"plan","title":"任务拆分与完成定义","role":"analyst","gate":"E1","sections":["目标与范围","任务与依赖","文件权限","完成定义","风险与待确认"]},
+    {"id":"design","title":"设计与实现建议","role":"architect","gate":"E2","sections":["设计结论","接口与数据","实现步骤","测试计划","风险与待确认"]},
+    {"id":"review","title":"变更与质量审查","role":"reviewer","gate":"E3","sections":["审查结论","证据与缺口","问题清单","测试结果","放行条件"]},
+    {"id":"handoff","title":"PR 与成果交接草稿","role":"editor","gate":"E4","sections":["变更摘要","文件范围","验证证据","风险与回退","人工审核项"]}
+  ]
+}

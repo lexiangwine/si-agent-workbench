@@ -1,0 +1,16 @@
+{
+  "version":"2.0.0",
+  "tasks":[
+    {"label":"SI 01 检查工作台","type":"process","command":"${config:si.python}","args":["-m","workbench","doctor"],"problemMatcher":[]},
+    {"label":"SI 02 离线演示","type":"process","command":"${config:si.python}","args":["-m","workbench","demo","--name","${input:demoName}"],"problemMatcher":[]},
+    {"label":"SI 03 打开本地看板","type":"process","command":"${config:si.python}","args":["-m","workbench","serve"],"problemMatcher":[]},
+    {"label":"SI 04 导出任务Prompt","type":"process","command":"${config:si.python}","args":["-m","workbench","prompt","${input:project}","${input:stage}"],"problemMatcher":[]},
+    {"label":"SI 05 查看项目状态","type":"process","command":"${config:si.python}","args":["-m","workbench","status","${input:project}"],"problemMatcher":[]},
+    {"label":"SI 06 运行单元测试","type":"process","command":"${config:si.python}","args":["-m","unittest","discover","-s","tests","-v"],"group":{"kind":"test","isDefault":true},"problemMatcher":[]}
+  ],
+  "inputs":[
+    {"id":"demoName","type":"promptString","description":"新的演示项目编号，避免覆盖已有项目","default":"demo-delivery"},
+    {"id":"project","type":"promptString","description":"项目编号","default":"p001"},
+    {"id":"stage","type":"promptString","description":"阶段编号，例如 requirements 或 plan","default":"requirements"}
+  ]
+}
