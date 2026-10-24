@@ -1,0 +1,29 @@
+name: PR contract
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+    branches: [main]
+permissions:
+  contents: read
+  pull-requests: read
+jobs:
+  contract:
+    name: contract
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate pull request body
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        shell: bash
+        run: |
+          python3 - <<'PYCODE'
+          import os, re, sys
+          body=os.environ.get('PR_BODY','')
+          expected=('## Linked issue','## Scope','## Evidence','## Risk and rollback','## Reviewer sign-off')
+          missing=[x for x in expected if x not in body]
+          issue=re.search(r'(?:Closes|Fixes|Resolves)\s+#[0-9]+',body,re.I)
+          if missing or not issue:
+              print('PR contract failed:', 'missing sections '+repr(missing), 'missing closing issue reference' if not issue else '')
+              sys.exit(1)
+          print('PASS: PR contract structure (content still needs human review)')
+          PYCODE

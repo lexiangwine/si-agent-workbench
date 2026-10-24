@@ -1,0 +1,28 @@
+name: Agent implementation task
+description: A scoped, testable work item
+title: '[Agent] '
+labels: ['agent-task']
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: Observable outcome
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Allowed files and prohibited changes
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Definition of Done
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies and input links

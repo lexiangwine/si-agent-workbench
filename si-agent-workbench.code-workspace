@@ -1,0 +1,9 @@
+{
+  "folders":[{"path":"."}],
+  "settings":{
+    "si.python":"python3",
+    "files.exclude":{"**/__pycache__":true},
+    "search.exclude":{"workspace/**":true,"**/.venv/**":true},
+    "files.eol":"\n"
+  }
+}

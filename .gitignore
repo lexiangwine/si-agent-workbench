@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+node_modules/
+.DS_Store
+workspace/
+config/providers.local.json
+*.local.json
+*.log
+dist/

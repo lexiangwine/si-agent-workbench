@@ -1,0 +1,53 @@
+{
+  "default_provider": "deepseek",
+  "roles": {
+    "analyst": "deepseek",
+    "architect": "openai",
+    "commercial": "deepseek",
+    "engineer": "claude",
+    "reviewer": "grok",
+    "editor": "claude"
+  },
+  "providers": {
+    "openai": {
+      "api": "responses",
+      "endpoint": "https://api.openai.com/v1/responses",
+      "allowed_hosts": ["api.openai.com"],
+      "api_key_env": "OPENAI_API_KEY",
+      "model": "env:OPENAI_MODEL",
+      "max_output_tokens": 3000,
+      "timeout_seconds": 90
+    },
+    "claude": {
+      "api": "anthropic_messages",
+      "endpoint": "https://api.anthropic.com/v1/messages",
+      "allowed_hosts": ["api.anthropic.com"],
+      "api_key_env": "ANTHROPIC_API_KEY",
+      "model": "env:ANTHROPIC_MODEL",
+      "api_version": "2023-06-01",
+      "workspace_id": "env:ANTHROPIC_WORKSPACE_ID",
+      "max_output_tokens": 3000,
+      "timeout_seconds": 90
+    },
+    "grok": {
+      "api": "chat_completions",
+      "endpoint": "https://api.x.ai/v1/chat/completions",
+      "allowed_hosts": ["api.x.ai"],
+      "api_key_env": "XAI_API_KEY",
+      "model": "env:XAI_MODEL",
+      "token_field": "max_completion_tokens",
+      "max_output_tokens": 3000,
+      "timeout_seconds": 90
+    },
+    "deepseek": {
+      "api": "chat_completions",
+      "endpoint": "https://api.deepseek.com/chat/completions",
+      "allowed_hosts": ["api.deepseek.com"],
+      "api_key_env": "DEEPSEEK_API_KEY",
+      "model": "env:DEEPSEEK_MODEL",
+      "token_field": "max_tokens",
+      "max_output_tokens": 3000,
+      "timeout_seconds": 90
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "系统集成项目交付",
+  "version": "1.0",
+  "stages": [
+    {"id":"requirements","title":"客户需求与范围冻结","role":"analyst","gate":"G1","sections":["需求结论","事实与来源","范围与排除项","待确认事项","验收指标"]},
+    {"id":"technical","title":"技术方案与接口评审","role":"architect","gate":"G2","sections":["方案结论","系统与接口","选型依据","实施前置条件","备选方案","待确认事项"]},
+    {"id":"commercial","title":"报价测算与商务评审","role":"commercial","gate":"G3","sections":["报价口径","成本与来源","毛利测算","回款与现金流","排除项与有效期","待确认事项"]},
+    {"id":"implementation","title":"施工与实施计划","role":"engineer","gate":"G4","sections":["实施步骤","现场与安全条件","资源与排期","测试与回退","客户配合","待确认事项"]},
+    {"id":"risk","title":"风险与交付审查","role":"reviewer","gate":"R1","sections":["审查结论","证据与缺口","风险台账","整改与责任人","放行条件"]},
+    {"id":"delivery","title":"最终交付文件草稿","role":"editor","gate":"G5","sections":["交付摘要","方案与范围","报价与边界","实施与验收","运维与质保","交接清单","未决事项"]}
+  ]
+}
