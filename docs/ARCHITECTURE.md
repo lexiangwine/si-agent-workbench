@@ -1,7 +1,7 @@
 # 架构与信任边界
 
 ## 模块
-CLI是业务写入口；Engine编排阶段和版本；Store管理文件、锁与原子替换；Providers只发文本HTTP请求；Dashboard只读取状态和指定成果路径。
+CLI是业务写入口；Engine编排阶段和版本；Contract校验任务契约格式（schema v2，手写校验器）；Store管理文件、锁与原子替换；Providers只发文本HTTP请求；Dashboard只读取状态和指定成果路径。
 
 ## 数据流
 new保存需求和流程快照 → prompt组合可信角色、当前要求和待分析资料并保存摘要 → import核对原任务输入或run返回后检查输入 → 校验章节后成为pending_review → 人工approve绑定输入、输出和前置批准摘要 → 开放下一阶段。

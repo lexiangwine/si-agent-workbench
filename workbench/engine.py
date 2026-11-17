@@ -4,6 +4,7 @@ import json
 import re
 
 from . import providers
+from .contract import load_contract
 from .storage import (Store, WorkbenchError, atomic_text, digest, identifier, managed,
                       now, read_json, read_text, write_json)
 
@@ -13,25 +14,13 @@ MAX_REMOTE_ATTEMPTS = 20
 
 
 def workflow(root, name):
-    data = read_json(managed(root, "workflows", identifier(name) + ".json"))
-    if not isinstance(data, dict):
-        raise WorkbenchError("流程必须是JSON对象。")
-    stages = data.get("stages", [])
-    if not isinstance(stages, list) or not stages or len(stages) > 20:
-        raise WorkbenchError("流程需要1—20个阶段。")
-    seen = set()
-    for stage in stages:
-        if not isinstance(stage, dict) or not all(isinstance(stage.get(k), str) and stage[k].strip()
-                                                  for k in ("title", "gate")):
-            raise WorkbenchError("阶段必须包含有效标题与门禁编号。")
-        sid = identifier(stage.get("id"))
-        identifier(stage.get("role"))
-        if sid in seen or not isinstance(stage.get("sections"), list) or not stage["sections"]:
-            raise WorkbenchError("阶段编号重复或未定义交付章节。")
-        if not all(isinstance(x, str) and x.strip() for x in stage["sections"]):
-            raise WorkbenchError("交付章节名称无效。")
-        seen.add(sid)
-    return data
+    """Load a workflow file; thin wrapper over the contract validator.
+
+    v1 files (no contract_version) keep the old rules; v2 files are fully
+    validated, including inputs and acceptance. Old project snapshots are
+    read through Engine.flow() and keep working without migration.
+    """
+    return load_contract(root, name)
 
 
 class Engine:

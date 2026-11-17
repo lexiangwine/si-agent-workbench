@@ -68,12 +68,16 @@ def main(argv=None):
             from .engine import workflow
             if sys.version_info < (3, 11):
                 raise WorkbenchError("需要 Python 3.11 或更新版本。")
+            versions = {}
             for name in ("delivery", "engineering"):
-                for stage in workflow(ROOT, name)["stages"]:
+                flow = workflow(ROOT, name)
+                versions[name] = flow.get("contract_version")
+                for stage in flow["stages"]:
                     read_text(ROOT / "agents" / (stage["role"] + ".md"))
             proc = subprocess.run(["git", "--version"], capture_output=True, text=True, check=True)
             print("PASS: Python", sys.version.split()[0], "|", proc.stdout.strip())
-            print("PASS: 两条流程与角色文件齐全；未联网、未读取或打印 API 密钥。")
+            print("PASS: 两条流程（契约 v%s/v%s）与角色文件齐全；未联网、未读取或打印 API 密钥。"
+                  % (versions["delivery"], versions["engineering"]))
         elif a.command == "list":
             names = engine.store.names()
             for name in names:
